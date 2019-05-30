@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+<form action= "userlogin.php" >
+	<fieldset>
+		<legend>Login</legend>
+		<br><input type="text" name = "user" autocomplete = off>user<br>
+		<br><input type="text" name = "pass" autocomplete = off>pass<br>
+		
+		<input type=submit>
+	</fieldset>
+
+</form>
+<?php
+
+$delay = 3;
+
+$user = getdata ( "user" ) ;
+$pass = getdata ( "pass" ) ;
+$delay = getdata ( "delay") ;
+
+echo "<br> User: $user <br> Pass: $pass <br> Delay: $delay<br>";
+
+if ( ! auth($user, $pass))  
+{ 
+   $message = "<br>Authentication Failed!!! Please provide proper credentials!!!<br>";
+   $target = "proto6form.html";
+   redirect($message, $delay, $target);
+}
+else
+{
+   $_SESSION['logged'] = true;
+   $_SESSION['user']   = $user;
+   $message = "Access Granted Now Directing You To Next Form in $delay seconds";
+   $target = "assignment1.html";
+   redirect($message, $delay, $target);
+}
+ 
+?>
+
+</html>
