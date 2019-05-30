@@ -1,41 +1,35 @@
-<!DOCTYPE html>
-
-<html>
-<form action= "userlogin.php" >
-	<fieldset>
-		<legend>Login</legend>
-		<br><input type="text" name = "user" autocomplete = off>user<br>
-		<br><input type="text" name = "pass" autocomplete = off>pass<br>
-		
-		<input type=submit>
-	</fieldset>
-
-</form>
 <?php
-
-$delay = 3;
-
-$user = getdata ( "user" ) ;
-$pass = getdata ( "pass" ) ;
-$delay = getdata ( "delay") ;
-
-echo "<br> User: $user <br> Pass: $pass <br> Delay: $delay<br>";
-
-if ( ! auth($user, $pass))  
-{ 
-   $message = "<br>Authentication Failed!!! Please provide proper credentials!!!<br>";
-   $target = "proto6form.html";
-   redirect($message, $delay, $target);
-}
-else
-{
-   $_SESSION['logged'] = true;
-   $_SESSION['user']   = $user;
-   $message = "Access Granted Now Directing You To Next Form in $delay seconds";
-   $target = "assignment1.html";
-   redirect($message, $delay, $target);
-}
- 
+session_start();
 ?>
+<!DOCTYPE html>
+<html>
+<head> <meta charset = "utf-8" /> 
+      <link rel="stylesheet" type="text/css" href="style1.css">
+    </head>
+<body>
+<div class="header">
+    <h1>Login</h1>
+    </div>
 
+        <form id='login' action='/clients.php' method='get' accept-charset='UTF-8'>
+            <div class="input-group">
+	<input type='hidden' name='login' value='login'>        
+        <input type='hidden' name='submitted' id='submitted' value='1'/>
+            <label for='username'> Username:</label>
+	<input type='text' name='username' id='username' maxlength="50" placeholder="Enter Username" required autofocus autocomplete=on />
+            </div>
+        
+            <div class="input-group">
+        <label for='password'> Password:</label>
+        <input type='password' name='password' id='password' maxlength="50"placeholder="Enter Password" required autofocus autocomplete=on />
+             
+                
+        <input type='submit' name='submit' value='submit'/>
+            </div>
+        </form>
+
+	<form action='register2.html' method='post'>
+                <button type='submit'>Registration</button>
+        </form>
+</body>
 </html>
